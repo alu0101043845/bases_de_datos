@@ -1,0 +1,743 @@
+SQL> SELECT SYSTIMESTAMP;
+SELECT SYSTIMESTAMP
+                  *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT SYSTIMESTRAP;
+SELECT SYSTIMESTRAP
+                  *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT TO_CHAR(SYSDATE,'H24:MI:SS')
+  2  FROM DUAL;
+SELECT TO_CHAR(SYSDATE,'H24:MI:SS')
+                       *
+ERROR at line 1:
+ORA-01821: date format not recognized 
+
+
+SQL> SELECT TO_CHAR(SYSDATE,'HH24:MI:SS')
+  2  FROM DUAL;
+
+TO_CHAR(                                                                        
+--------                                                                        
+12:13:30                                                                        
+
+SQL> SELECT TO_CHAR(SYSTIMESTAMP)
+  2  FROM DUAL;
+
+TO_CHAR(SYSTIMESTAMP)                                                           
+-------------------------------------------------------------------------       
+23-NOV-18 12.14.18.111012 PM +00:00                                             
+
+SQL> SELECT TO_CHAR(SYSTIMESTAMP,'HH24:MI:SSXFF3')
+  2  FROM DUAL;
+
+TO_CHAR(SYST                                                                    
+------------                                                                    
+12:14:44.590                                                                    
+
+SQL> SELECT TO_CHAR(FI,'YYYY')
+  2  FROM PLAN_DOCENTE;
+
+TO_C                                                                            
+----                                                                            
+2005                                                                            
+2008                                                                            
+2009                                                                            
+2007                                                                            
+2009                                                                            
+2008                                                                            
+2006                                                                            
+2009                                                                            
+2009                                                                            
+2008                                                                            
+2009                                                                            
+
+TO_C                                                                            
+----                                                                            
+2011                                                                            
+2008                                                                            
+2010                                                                            
+2010                                                                            
+2008                                                                            
+2010                                                                            
+2009                                                                            
+2010                                                                            
+
+19 rows selected.
+
+SQL> SELECT EXTRACT(YEAR FROM FI)
+  2  FROM PLAN_DOCENTE;
+
+EXTRACT(YEARFROMFI)                                                             
+-------------------                                                             
+               2005                                                             
+               2008                                                             
+               2009                                                             
+               2007                                                             
+               2009                                                             
+               2008                                                             
+               2006                                                             
+               2009                                                             
+               2009                                                             
+               2008                                                             
+               2009                                                             
+
+EXTRACT(YEARFROMFI)                                                             
+-------------------                                                             
+               2011                                                             
+               2008                                                             
+               2010                                                             
+               2010                                                             
+               2008                                                             
+               2010                                                             
+               2009                                                             
+               2010                                                             
+
+19 rows selected.
+
+SQL> SELECT EXTRACT(MONTH FROM FI)
+  2  FROM PLAN_DOCENTE;
+
+EXTRACT(MONTHFROMFI)                                                            
+--------------------                                                            
+                   9                                                            
+                   9                                                            
+                   9                                                            
+                   9                                                            
+                   9                                                            
+                   9                                                            
+                   9                                                            
+                   9                                                            
+                   9                                                            
+                   9                                                            
+                   9                                                            
+
+EXTRACT(MONTHFROMFI)                                                            
+--------------------                                                            
+                   9                                                            
+                   9                                                            
+                   9                                                            
+                   3                                                            
+                   9                                                            
+                   9                                                            
+                   9                                                            
+                   9                                                            
+
+19 rows selected.
+
+SQL> SELECT TO_CHAR(FI,'MM')
+  2  FROM PLAN_DOCENTE;
+
+TO                                                                              
+--                                                                              
+09                                                                              
+09                                                                              
+09                                                                              
+09                                                                              
+09                                                                              
+09                                                                              
+09                                                                              
+09                                                                              
+09                                                                              
+09                                                                              
+09                                                                              
+
+TO                                                                              
+--                                                                              
+09                                                                              
+09                                                                              
+09                                                                              
+03                                                                              
+09                                                                              
+09                                                                              
+09                                                                              
+09                                                                              
+
+19 rows selected.
+
+SQL> SELECT TO_CHAR(FI,'MONTH')
+  2  FROM PLAN_DOCENTE;
+
+TO_CHAR(FI,'MONTH')                                                             
+------------------------------------                                            
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+
+TO_CHAR(FI,'MONTH')                                                             
+------------------------------------                                            
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+MARCH                                                                           
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+SEPTEMBER                                                                       
+
+19 rows selected.
+
+SQL> SELECT EXTRACT(HOUR FROM FI)
+  2  FROM PLAN_DOCENTE;
+SELECT EXTRACT(HOUR FROM FI)
+                         *
+ERROR at line 1:
+ORA-30076: invalid extract field for extract source 
+
+
+SQL> SELECT SYSTAMP
+  2  FROM DUAL;
+SELECT SYSTAMP
+       *
+ERROR at line 1:
+ORA-00904: "SYSTAMP": invalid identifier 
+
+
+SQL> SELECT SYSTIMESTAMP
+  2  FROM DUAL;
+
+SYSTIMESTAMP                                                                    
+---------------------------------------------------------------------------     
+23-NOV-18 12.19.22.918351 PM +00:00                                             
+
+SQL> SELECT TO_CHAR(SYSTIMESTAMP,'HH24:MI:SS')
+  2  FROM DUAL;
+
+TO_CHAR(                                                                        
+--------                                                                        
+12:19:47                                                                        
+
+SQL> SELECT TO_CHAR(SYSTIMESTAMP,'HH24:MI:SS')
+  2  FROM DUAL;
+
+TO_CHAR(                                                                        
+--------                                                                        
+12:19:53                                                                        
+
+SQL> SELECT TO_CHAR(SYSTIMESTAMP,'HH24:MI:SS')
+  2  FROM DUAL;
+
+TO_CHAR(                                                                        
+--------                                                                        
+12:19:59                                                                        
+
+SQL> SELECT TO_CHAR(SYSTIMESTAMP,'HH24:MI:SS')
+  2  FROM DUAL;
+
+TO_CHAR(                                                                        
+--------                                                                        
+12:20:01                                                                        
+
+SQL> SELECT TO_CHAR(SYSTIMESTAMP,'WW, DD MONTH YYYY')
+  2  FROM DUAL;
+
+TO_CHAR(SYSTIMESTAMP,'WW,DDMONTHYYYY')                                          
+------------------------------------------------                                
+47, 23 NOVEMBER  2018                                                           
+
+SQL> SELECT TO_CHAR(SYSTIMESTAMP,'Q, DD MONTH YYYY')
+  2  FROM DUAL;
+
+TO_CHAR(SYSTIMESTAMP,'Q,DDMONTHYYYY')                                           
+-----------------------------------------------                                 
+4, 23 NOVEMBER  2018                                                            
+
+SQL> SELECT TO_CHAR(SYSTIMESTAMP,'W, DD MONTH YYYY')
+  2  FROM DUAL;
+
+TO_CHAR(SYSTIMESTAMP,'W,DDMONTHYYYY')                                           
+-----------------------------------------------                                 
+4, 23 NOVEMBER  2018                                                            
+
+SQL> SELECT TO_CHAR(SYSTIMESTAMP,'IW, DD MONTH YYYY')
+  2  FROM DUAL;
+
+TO_CHAR(SYSTIMESTAMP,'IW,DDMONTHYYYY')                                          
+------------------------------------------------                                
+47, 23 NOVEMBER  2018                                                           
+
+SQL> SELECT TO_CHAR(SYSTIMESTAMP,'Q, DD MONTH YYYY')
+  2  FROM DUAL;
+
+TO_CHAR(SYSTIMESTAMP,'Q,DDMONTHYYYY')                                           
+-----------------------------------------------                                 
+4, 23 NOVEMBER  2018                                                            
+
+SQL> SELECT EXTRACT(HOUR FROM SYSTIMESTAMP)
+  2  FROM DUAL;
+
+EXTRACT(HOURFROMSYSTIMESTAMP)                                                   
+-----------------------------                                                   
+                           12                                                   
+
+SQL> SELECT FF-FI
+  2  FROM PLAN_DOCENTE
+  3  WHERE CAS = 11 AND DNI = 8888;
+
+     FF-FI                                                                      
+----------                                                                      
+                                                                                
+
+SQL> SELECT FF AND FI
+  2  FROM PLAN_DOCENTE
+  3  WHERE CAS = 11 AND DNI = 8888;
+SELECT FF AND FI
+          *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT FF AND FI
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI = 8888;
+SELECT FF AND FI
+          *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT FF AND FI
+  2  FROM PLAN_DOCENTE
+  3  WHERE DNI = '8888';
+SELECT FF AND FI
+          *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT FF, FI
+  2  FROM PLAN_DOCENTE
+  3  WHERE CAS = 11 AND DNI = 8888;
+
+FF        FI                                                                    
+--------- ---------                                                             
+          01-SEP-09                                                             
+
+SQL> SELECT FF-FI
+  2  FROM PLAN_DOCENTE
+  3  WHERE CAS = 4 AND DNI = 4444;
+
+     FF-FI                                                                      
+----------                                                                      
+       729                                                                      
+
+SQL> SELECT SYSDATE
+  2  FROM DUAL;
+
+SYSDATE                                                                         
+---------                                                                       
+23-NOV-18                                                                       
+
+SQL> SELECT SYSTIMESTAMP
+  2  FROM DUAL;
+
+SYSTIMESTAMP                                                                    
+---------------------------------------------------------------------------     
+23-NOV-18 12.27.07.798612 PM +00:00                                             
+
+SQL> SELECT SYSDATE-FI
+  2  FROM PLAN_DOCENTE
+  3  WHERE CAS = 4 AND DNI = 4444;
+
+SYSDATE-FI                                                                      
+----------                                                                      
+3735.51973                                                                      
+
+SQL> SELECT SYSDATE-FI
+  2  FROM PLAN_DOCENTE
+  3  WHERE CAS = 4 AND DNI = 4444 AND FF IS NULL;
+
+no rows selected
+
+SQL> SELECT FF
+  2  FROM PLAN_DOCENTE
+  3  WHERE CAS = 4 AND DNI = 4444;
+
+FF                                                                              
+---------                                                                       
+31-AUG-10                                                                       
+
+SQL> SELECT SYSDATE-FI
+  2  FROM PLAN_DOCENTE
+  3  WHERE CAS = 11 AND DNI = 8888 AND FF IS NULL;
+
+SYSDATE-FI                                                                      
+----------                                                                      
+3370.52109                                                                      
+
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DNI
+  4  FROM PLAN_DOCENTE
+  5  WHERE FF-FI > 365);
+
+P                                                                               
+------------------------------------------------------------                    
+JUAN                                                                            
+MARIA                                                                           
+CARMEN                                                                          
+DAVID                                                                           
+
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DNI
+  4  FROM PLAN_DOCENTE
+  5  WHERE FF-FI > 365 OR (FF IS NULL AND SYSDATE-FI > 365));
+
+P                                                                               
+------------------------------------------------------------                    
+DAVID                                                                           
+JUAN                                                                            
+SOLEDAD                                                                         
+CARLOS                                                                          
+JOSE MANUEL                                                                     
+PEDRO                                                                           
+MARIA                                                                           
+IVAN                                                                            
+CARMEN                                                                          
+MARIO                                                                           
+FRANCISCO                                                                       
+
+P                                                                               
+------------------------------------------------------------                    
+ANGELA                                                                          
+
+12 rows selected.
+
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DNI
+  4  FROM PLAN_DOCENTE
+  5  WHERE FF-FI < 365 OR (FF IS NULL AND SYSDATE-FI < 365));
+
+P                                                                               
+------------------------------------------------------------                    
+DAVID                                                                           
+CARLOS                                                                          
+
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DNI
+  4  FROM PLAN_DOCENTE
+  5  WHERE FF-FI > 365 OR (FF IS NULL AND SYSDATE-FI > 365));
+
+P                                                                               
+------------------------------------------------------------                    
+DAVID                                                                           
+JUAN                                                                            
+SOLEDAD                                                                         
+CARLOS                                                                          
+JOSE MANUEL                                                                     
+PEDRO                                                                           
+MARIA                                                                           
+IVAN                                                                            
+CARMEN                                                                          
+MARIO                                                                           
+FRANCISCO                                                                       
+
+P                                                                               
+------------------------------------------------------------                    
+ANGELA                                                                          
+
+12 rows selected.
+
+SQL> SELECT COUNT(DISTINCT DNI)
+  2  FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
+  3  WHERE D = 'ASTROFISICA';
+
+COUNT(DISTINCTDNI)                                                              
+------------------                                                              
+                 1                                                              
+
+SQL> SELECT COUNT(DISTINCT DNI)
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DNI
+  4  FROM AREA
+  5  WHERE CD = (SELECT CD
+  6  FROM DEPARTAMENTO
+  7  WHERE D = 'ASTROFISICA'));
+
+COUNT(DISTINCTDNI)                                                              
+------------------                                                              
+                12                                                              
+
+SQL> COLUMN P FORMAT A20
+SQL> SELECT CD COUNT(*)
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  GROOUP BY CD;
+SELECT CD COUNT(*)
+               *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SET LINESIZE 200
+SQL> SELECT CD, COUNT(*)
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  GROOUP BY CD;
+GROOUP BY CD
+       *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT CD, COUNT(*)
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  GROUP BY CD;
+
+        CD   COUNT(*)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+         1          3                                                                                                                                                                                   
+         2          1                                                                                                                                                                                   
+         4          1                                                                                                                                                                                   
+         3          7                                                                                                                                                                                   
+
+SQL> SELECT CD, DNI, P, AR
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  ORDER BY CD;
+
+        CD        DNI P                    AR                                                                                                                                                           
+---------- ---------- -------------------- ------------------------------------------------------------                                                                                                 
+         1       8888 FRANCISCO            DIDACTICA DE LA MATEMATICA                                                                                                                                   
+         1       9999 ANGELA               MATEMATICA APLICADA                                                                                                                                          
+         1       7777 MARIO                ANALISIS MATEMATICO                                                                                                                                          
+         2       6666 CARMEN               ASTRONOMIA Y ASTROFISICA                                                                                                                                     
+         3       3333 PEDRO                CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                                                                                                         
+         3       2020 SOLEDAD              LENGUAJES Y SISTEMAS INFORMATICOS                                                                                                                            
+         3       1111 JUAN                 ESTADISTICA E INVESTIGACION OPERATIVA                                                                                                                        
+         3       2222 CARLOS               LENGUAJES Y SISTEMAS INFORMATICOS                                                                                                                            
+         3       1010 DAVID                CIENCIAS DE LA COMPUTACION E INTELIGENCIA ARTIFICIAL                                                                                                         
+         3       3030 JOSE MANUEL          ESTADISTICA E INVESTIGACION OPERATIVA                                                                                                                        
+         3       4444 MARIA                LENGUAJES Y SISTEMAS INFORMATICOS                                                                                                                            
+
+        CD        DNI P                    AR                                                                                                                                                           
+---------- ---------- -------------------- ------------------------------------------------------------                                                                                                 
+         4       5555 IVAN                 ALGEBRA                                                                                                                                                      
+
+12 rows selected.
+
+SQL> SELECT D, COUNT(*)
+  2  FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
+  3  GROUP BY D;
+
+D                                                              COUNT(*)                                                                                                                                 
+------------------------------------------------------------ ----------                                                                                                                                 
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                    7                                                                                                                                 
+ASTROFISICA                                                           1                                                                                                                                 
+ANALISIS MATEMATICO                                                   3                                                                                                                                 
+MATEMATICA FUNDAMENTAL                                                1                                                                                                                                 
+
+SQL> SELECT D, COUNT(*)
+  2  FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
+  3  WHERE D = 'ASTROFISICA';
+SELECT D, COUNT(*)
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT D, COUNT(*)
+  2  FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
+  3  WHERE D = 'ASTROFISICA';
+SELECT D, COUNT(*)
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT COUNT(DISTINCT DNI)
+  2  FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
+  3  WHERE D = 'ASTROFISICA';
+
+COUNT(DISTINCTDNI)                                                                                                                                                                                      
+------------------                                                                                                                                                                                      
+                 1                                                                                                                                                                                      
+
+SQL> SELECT D, COUNT(DISTINCT DNI)
+  2  FROM PROFESOR NATURAL JOIN AREA NATURAL JOIN DEPARTAMENTO
+  3  WHERE D = 'ASTROFISICA';
+SELECT D, COUNT(DISTINCT DNI)
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT D, COUNT(DISTINCT DNI)
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  WHERE D = 'ASTROFISICA';
+SELECT D, COUNT(DISTINCT DNI)
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT D, COUNT(DISTINCT DNI)
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D
+  4  ORDER BY D;
+
+D                                                            COUNT(DISTINCTDNI)                                                                                                                         
+------------------------------------------------------------ ------------------                                                                                                                         
+ANALISIS MATEMATICO                                                           3                                                                                                                         
+ASTROFISICA                                                                   1                                                                                                                         
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                            7                                                                                                                         
+MATEMATICA FUNDAMENTAL                                                        1                                                                                                                         
+
+SQL> SELECT D, COUNT(DISTINCT DNI)
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D;
+
+D                                                            COUNT(DISTINCTDNI)                                                                                                                         
+------------------------------------------------------------ ------------------                                                                                                                         
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                            7                                                                                                                         
+ASTROFISICA                                                                   1                                                                                                                         
+ANALISIS MATEMATICO                                                           3                                                                                                                         
+MATEMATICA FUNDAMENTAL                                                        1                                                                                                                         
+
+SQL> SELECT D, COUNT(DISTINCT T)
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN ASIGNATURA
+  3  WHERE D = '';
+SELECT D, COUNT(DISTINCT T)
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT COUNT(DISTINCT T)
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN ASIGNATURA
+  3  WHERE D = 'ESTADISTICA, INVESTIGACION OPERTATIVA Y COMPUTACION';
+
+COUNT(DISTINCTT)                                                                                                                                                                                        
+----------------                                                                                                                                                                                        
+               0                                                                                                                                                                                        
+
+SQL> SELECT D, COUNT(DISTINCT T)
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN ASIGNATURA
+  3  GROUP BY D;
+
+D                                                            COUNT(DISTINCTT)                                                                                                                           
+------------------------------------------------------------ ----------------                                                                                                                           
+ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                          2                                                                                                                           
+ASTROFISICA                                                                 1                                                                                                                           
+ANALISIS MATEMATICO                                                         2                                                                                                                           
+MATEMATICA FUNDAMENTAL                                                      1                                                                                                                           
+
+SQL> SELECT AR COUNT(DISTINCT DNI)
+  2  FROM PROFESOR NATURAL JOIN AREA
+  3  WHERE AR LIKE 'A%'
+  4  GROUP BY AR;
+SELECT AR COUNT(DISTINCT DNI)
+               *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT AR COUNT(*)
+  2  FROM AREA NATURAL JOIN PROFESOR
+  3  WHERE AR LIKE 'A%'
+  4  GROUP BY AR;
+SELECT AR COUNT(*)
+               *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT AR COUNT(*)
+  2  FROM AREA NATURAL JOIN PROFESOR
+  3  GROUP BY AR
+  4  HAVING AR LIKE 'A%';
+SELECT AR COUNT(*)
+               *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT AR, COUNT(*)
+  2  FROM AREA NATURAL JOIN PROFESOR
+  3  GROUP BY AR
+  4  HAVING AR LIKE 'A%';
+
+AR                                                             COUNT(*)                                                                                                                                 
+------------------------------------------------------------ ----------                                                                                                                                 
+ALGEBRA                                                               1                                                                                                                                 
+ASTRONOMIA Y ASTROFISICA                                              1                                                                                                                                 
+ANALISIS MATEMATICO                                                   1                                                                                                                                 
+
+SQL> SPOOL OFF
+SQL> MAX CT
+SP2-0042: unknown command "MAX CT" - rest of line ignored.
+SQL> MAX CT FROM ASIGNATURA
+SP2-0734: unknown command beginning "MAX CT FRO..." - rest of line ignored.
+SQL> MAX CT FROM ASIGNATURA;
+SP2-0734: unknown command beginning "MAX CT FRO..." - rest of line ignored.
+SQL> SELECT MAX CT
+  2  FROM ASIGNATURA;
+SELECT MAX CT
+       *
+ERROR at line 1:
+ORA-00904: "MAX": invalid identifier 
+
+
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  ;
+
+A                                                                               
+--------------------------------------------------                              
+BASES DE DATOS                                                                  
+INTELIGENCIA ARTIFICIAL                                                         
+ALMACENES DE DATOS                                                              
+MINERIA DE DATOS                                                                
+INFORMATICA BASICA                                                              
+ALGEBRA                                                                         
+CALCULO                                                                         
+OPTIMIZACION                                                                    
+GESTION DE RIESGOS                                                              
+ASTRONIMIA                                                                      
+ENSEANZA DE LA MATEMATICA                                                       
+
+A                                                                               
+--------------------------------------------------                              
+ANALISIS COMPLEJO                                                               
+
+12 rows selected.
+
+SQL> SPOOL OFF
+SQL> SELECT MAX CT
+  2  FROM ASIGNATURA;
+SELECT MAX CT
+       *
+ERROR at line 1:
+ORA-00904: "MAX": invalid identifier 
+
+
+SQL> SELECT MAX (CT)
+  2  FROM ASIGNATURA;
+
+   MAX(CT)                                                                      
+----------                                                                      
+         6                                                                      
+
+SQL> SELECT A, MAX (CT)
+  2  FROM ASIGNATURA;
+SELECT A, MAX (CT)
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SPOOL OFF
