@@ -1,0 +1,617 @@
+SQL> SELECT A
+  2  FROM ASIGNATURA
+  3  WHERE CT >= (SELECT MAX(CT)
+  4  FROM ASIGNATURA);
+
+A                                                                               
+--------------------------------------------------                              
+ENSEANZA DE LA MATEMATICA                                                       
+
+SQL> SELECT A, CT
+  2  FROM ASIGNATURA
+  3  WHERE CT >= (SELECT MAX(CT)
+  4  FROM ASIGNATURA);
+
+A                                                          CT                   
+-------------------------------------------------- ----------                   
+ENSEANZA DE LA MATEMATICA                                   6                   
+
+SQL> SELECT A, CT
+  2  WHERE CT >= (SELECT MIN(CT)
+  3  
+SQL> SELECT A, CT
+  2  FROM ASIGNATURA
+  3  WHERE CT >= (SELECT MIN(CT)
+  4  FROM ASIGNATURA);
+
+A                                                          CT                   
+-------------------------------------------------- ----------                   
+BASES DE DATOS                                              3                   
+INTELIGENCIA ARTIFICIAL                                   1.5                   
+ALMACENES DE DATOS                                        1.5                   
+MINERIA DE DATOS                                          1.5                   
+INFORMATICA BASICA                                          3                   
+ALGEBRA                                                     3                   
+CALCULO                                                     3                   
+OPTIMIZACION                                                3                   
+GESTION DE RIESGOS                                          3                   
+ASTRONIMIA                                                  3                   
+ENSEANZA DE LA MATEMATICA                                   6                   
+
+A                                                          CT                   
+-------------------------------------------------- ----------                   
+ANALISIS COMPLEJO                                         4.5                   
+
+12 rows selected.
+
+SQL> SELECT A, CT
+  2  FROM ASIGNATURA
+  3  WHERE CT =< (SELECT MIN(CT)
+  4  FROM ASIGNATURA);
+WHERE CT =< (SELECT MIN(CT)
+          *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> SELECT A, CT
+  2  FROM ASIGNATURA
+  3  WHERE CT <= (SELECT MIN(CT)
+  4  FROM ASIGNATURA);
+
+A                                                          CT                   
+-------------------------------------------------- ----------                   
+INTELIGENCIA ARTIFICIAL                                   1.5                   
+ALMACENES DE DATOS                                        1.5                   
+MINERIA DE DATOS                                          1.5                   
+
+SQL> SELECT A, CT+CP+CL "CREDITOS TOTALES"
+  2  FROM ASIGNATURA;
+
+A                                                  CREDITOS TOTALES             
+-------------------------------------------------- ----------------             
+BASES DE DATOS                                                    6             
+INTELIGENCIA ARTIFICIAL                                           6             
+ALMACENES DE DATOS                                                3             
+MINERIA DE DATOS                                                  3             
+INFORMATICA BASICA                                                6             
+ALGEBRA                                                           6             
+CALCULO                                                           6             
+OPTIMIZACION                                                      6             
+GESTION DE RIESGOS                                                6             
+ASTRONIMIA                                                        6             
+ENSEANZA DE LA MATEMATICA                                         6             
+
+A                                                  CREDITOS TOTALES             
+-------------------------------------------------- ----------------             
+ANALISIS COMPLEJO                                               7.5             
+
+12 rows selected.
+
+SQL> SELECT A, CT+CP+CL "CREDITOS TOTALES"
+  2  FROM ASIGNATURA
+  3  WHERE CT+CP+CL >= (SELECT MAX(CT+CP+CL)
+  4  FROM ASIGNATURA);
+
+A                                                  CREDITOS TOTALES             
+-------------------------------------------------- ----------------             
+ANALISIS COMPLEJO                                               7.5             
+
+SQL> SELECT A, CT+CP+CL "CREDITOS TOTALES"
+  2  FROM ASIGNATURA
+  3  WHERE CT+CP+CL <= (SELECT MIN(CT+CP+CL)
+  4  SELECT A, CT+CP+CL "CREDITOS TOTALES"
+  5  ;
+WHERE CT+CP+CL <= (SELECT MIN(CT+CP+CL)
+                   *
+ERROR at line 3:
+ORA-00921: unexpected end of SQL command 
+
+
+SQL> SELECT A, CT+CP+CL "CREDITOS TOTALES"
+  2  FROM ASIGNATURA
+  3  WHERE CT+CP+CL <= (SELECT MIN(CT+CP+CL)
+  4  FROM ASIGNATURA);
+
+A                                                  CREDITOS TOTALES             
+-------------------------------------------------- ----------------             
+ALMACENES DE DATOS                                                3             
+MINERIA DE DATOS                                                  3             
+
+SQL> SELECT AR
+  2  FROM AREA
+  3  WHERE CAR IN (SELECT CAR
+  4  FROM ASIGNATURA
+  5  WHERE CT+CP+CL >= (SELECT MAX(CT+CP+CL)
+  6  FROM ASIGNATURA));
+
+AR                                                                              
+------------------------------------------------------------                    
+ANALISIS MATEMATICO                                                             
+
+SQL> SELECT COUNT(DISTINCT CAS)
+  2  FROM PLAN_DOCENTE
+  3  GROUP BY DNI
+  4  HAVING DNI = 1111;
+
+COUNT(DISTINCTCAS)                                                              
+------------------                                                              
+                 1                                                              
+
+SQL> SELECT SUM(CTA+CPA+CLA)
+  2  GROUP BY DNI
+  3  GROUP BY DNI;
+GROUP BY DNI
+*
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT SUM(CTA+CPA+CLA)
+  2  FROM PLAN_DOCENTE
+  3  GROUP BY DNI
+  4  HAVING DNI = 1111;
+
+SUM(CTA+CPA+CLA)                                                                
+----------------                                                                
+               9                                                                
+
+SQL> SELECT SUM(CTA+CPA+CLA)
+  2  FROM PLAN_DOCENTE
+  3  HAVING DNI = 1111 AND FF IS NULL;
+HAVING DNI = 1111 AND FF IS NULL
+                      *
+ERROR at line 3:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT SUM(CTA+CPA+CLA)
+  2  FROM PLAN_DOCENTE
+  3  HAVING FF IS NULL;
+HAVING FF IS NULL
+       *
+ERROR at line 3:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT SUM(CTA+CPA+CLA)
+  2  FROM PLAN_DOCENTE
+  3  HAVING DNI = 1111;
+HAVING DNI = 1111
+       *
+ERROR at line 3:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT SUM(CTA+CPA+CLA)
+  2  FROM PLAN_DOCENTE
+  3  WHERE FF IS NULL
+  4  GROUP BY DNI
+  5  HAVING DNI = 1111;
+
+SUM(CTA+CPA+CLA)                                                                
+----------------                                                                
+               3                                                                
+
+SQL> SELECT P
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE FF IS NULL AND CTA+CPA+CLA >= (SELECT MAX(CTA+CPA+CLA)
+  4  FROM PLAN_DOCENTE
+  5  WHERE FF IS NULL);
+
+P                                                                               
+------------------------------------------------------------                    
+MARIO                                                                           
+
+SQL> SELECT P
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE FF IS NULL AND CTA+CPA+CLA >= (SELECT MAX(CTA+CPA+CLA)
+  4  FROM PLAN_DOCENTE);
+
+P                                                                               
+------------------------------------------------------------                    
+MARIO                                                                           
+
+SQL> SELECT P
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  ;
+
+P                                                                               
+------------------------------------------------------------                    
+DAVID                                                                           
+DAVID                                                                           
+DAVID                                                                           
+JUAN                                                                            
+JUAN                                                                            
+SOLEDAD                                                                         
+CARLOS                                                                          
+CARLOS                                                                          
+JOSE MANUEL                                                                     
+PEDRO                                                                           
+PEDRO                                                                           
+
+P                                                                               
+------------------------------------------------------------                    
+MARIA                                                                           
+MARIA                                                                           
+MARIA                                                                           
+IVAN                                                                            
+CARMEN                                                                          
+MARIO                                                                           
+FRANCISCO                                                                       
+ANGELA                                                                          
+
+19 rows selected.
+
+SQL> SELECT P
+  2  FROM PROFESOR
+  3  WHERE DNI IN (SELECT DNI
+  4  FROM PLAN_DOCENTE
+  5  SELECT P;
+SELECT P
+*
+ERROR at line 5:
+ORA-00907: missing right parenthesis 
+
+
+SQL> SELECT P, MAX(SUM(CTA+CPA+CLA))
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE FF IS NULL;
+SELECT P, MAX(SUM(CTA+CPA+CLA))
+              *
+ERROR at line 1:
+ORA-00978: nested group function without GROUP BY 
+
+
+SQL> SELECT AR, AVG(COUNT (*))
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  ;
+SELECT AR, AVG(COUNT (*))
+               *
+ERROR at line 1:
+ORA-00978: nested group function without GROUP BY 
+
+
+SQL> SELECT AR, AVG(COUNT (*))
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  GROUP BY AR;
+SELECT AR, AVG(COUNT (*))
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT AVG(A)
+  2  FROM ASIGNATURA
+  3  GROUP BY CAR;
+SELECT AVG(A)
+           *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT AVG(COUNT (*))
+  2  FROM ASIGNATURA
+  3  GROUP BY CAR;
+
+AVG(COUNT(*))                                                                   
+-------------                                                                   
+          1.5                                                                   
+
+SQL> SELECT AVG(COUNT (*))
+  2  FROM AREA NATURAL JOIN PROFESOR
+  3  GROUP BY CD;
+
+AVG(COUNT(*))                                                                   
+-------------                                                                   
+         3.75                                                                   
+
+SQL> SELECT AVG(COUNT (DISTINCT DNI))
+  2  FROM AREA NATURAL JOIN PROFESOR
+  3  GROUP BY CD;
+
+AVG(COUNT(DISTINCTDNI))                                                         
+-----------------------                                                         
+                   3.75                                                         
+
+SQL> SELECT COUNT (DISTINCT DNI)
+  2  FROM AREA NATURAL JOIN PROFESOR
+  3  GROUP BY CD;
+
+COUNT(DISTINCTDNI)                                                              
+------------------                                                              
+                 4                                                              
+                 1                                                              
+                 1                                                              
+                 9                                                              
+
+SQL> SELECT COUNT (DISTINCT DNI)
+  2  FROM AREA NATURAL JOIN PROFESOR
+  3  GROUP BY CD;
+
+COUNT(DISTINCTDNI)                                                              
+------------------                                                              
+                 4                                                              
+                 1                                                              
+                 1                                                              
+                 9                                                              
+
+SQL> SELECT COUNT (DISTINCT DNI)
+  2  FROM AREA
+  3  ;
+SELECT COUNT (DISTINCT DNI)
+                       *
+ERROR at line 1:
+ORA-00904: "DNI": invalid identifier 
+
+
+SQL> SELECT COUNT (DISTINCT DNI)
+  2  FROM AREA NATURAL JOIN PROFESOR
+  3  GROUP BY CD;
+
+COUNT(DISTINCTDNI)                                                              
+------------------                                                              
+                 4                                                              
+                 1                                                              
+                 1                                                              
+                 9                                                              
+
+SQL> SELECT DISTINCT DNI
+  2  FROM AREA NATURAL JOIN PROFESOR
+  3  GROUP BY CD;
+SELECT DISTINCT DNI
+                *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT DISTINCT DNI
+  2  FROM AREA NATURAL JOIN PROFESOR
+  3  ORDER BY CD;
+ORDER BY CD
+         *
+ERROR at line 3:
+ORA-01791: not a SELECTed expression 
+
+
+SQL> SELECT DISTINCT DNI
+  2  FROM AREA NATURAL JOIN PROFESOR
+  3  ORDER BY CAR;
+ORDER BY CAR
+         *
+ERROR at line 3:
+ORA-01791: not a SELECTed expression 
+
+
+SQL> SELECT DISTINCT DNI
+  2  FROM AREA NATURAL JOIN PROFESOR
+  3  ;
+
+       DNI                                                                      
+----------                                                                      
+      9090                                                                      
+      1111                                                                      
+      2222                                                                      
+      3333                                                                      
+      4444                                                                      
+      5555                                                                      
+      6666                                                                      
+      7777                                                                      
+      8888                                                                      
+      9999                                                                      
+      1010                                                                      
+
+       DNI                                                                      
+----------                                                                      
+      2020                                                                      
+      3030                                                                      
+      4040                                                                      
+      5050                                                                      
+
+15 rows selected.
+
+SQL> SELECT AR
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  WHERE COUNT (DISTINCT A) > 3
+  4  GROUP BY AR;
+WHERE COUNT (DISTINCT A) > 3
+      *
+ERROR at line 3:
+ORA-00934: group function is not allowed here 
+
+
+SQL> SELECT COUNT (DISTINCT A)
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  GROUP BY AR;
+
+COUNT(DISTINCTA)                                                                
+----------------                                                                
+               1                                                                
+               1                                                                
+               2                                                                
+               1                                                                
+               1                                                                
+               4                                                                
+               1                                                                
+               1                                                                
+
+8 rows selected.
+
+SQL> SELECT COUNT (DISTINCT A)
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  GROUP BY AR
+  4  HAVING COUNT (DISTINCT A) > 3;
+
+COUNT(DISTINCTA)                                                                
+----------------                                                                
+               4                                                                
+
+SQL> SELECT AR, COUNT (DISTINCT A)
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  GROUP BY AR
+  4  HAVING COUNT (DISTINCT A) > 3;
+
+AR                                                           COUNT(DISTINCTA)   
+------------------------------------------------------------ ----------------   
+LENGUAJES Y SISTEMAS INFORMATICOS                                           4   
+
+SQL> SELECT AR, COUNT (DISTINCT A)
+  2  FROM AREA NATURAL JOIN ASIGNATURA
+  3  GROUP BY AR
+  4  HAVING COUNT (DISTINCT A) > 6;
+
+no rows selected
+
+SQL> SELECT D
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D
+  4  HAVING COUNT(DINSTINCT P) <= (SELECT MIN(COUNT(DISTINCT P)
+  5  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  6  GROUP BY D);
+HAVING COUNT(DINSTINCT P) <= (SELECT MIN(COUNT(DISTINCT P)
+                       *
+ERROR at line 4:
+ORA-00907: missing right parenthesis 
+
+
+SQL> SELECT D
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D
+  4  HAVING COUNT(DISTINCT P) <= (SELECT MIN(COUNT(DISTINCT P)
+  5  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  6  GROUP BY D);
+HAVING COUNT(DISTINCT P) <= (SELECT MIN(COUNT(DISTINCT P)
+                             *
+ERROR at line 4:
+ORA-00921: unexpected end of SQL command 
+
+
+SQL> GROUP BY D, MIN(COUNT(DISTINCT P))
+SP2-0734: unknown command beginning "GROUP BY D..." - rest of line ignored.
+SQL> SELECT D, MIN(COUNT(DISTINCT P))
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D
+  4  ;
+SELECT D, MIN(COUNT(DISTINCT P))
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT MIN(COUNT(DISTINCT P))
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D;
+
+MIN(COUNT(DISTINCTP))                                                           
+---------------------                                                           
+                    1                                                           
+
+SQL> SELECT D, MIN(COUNT(DISTINCT P))
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D;
+SELECT D, MIN(COUNT(DISTINCT P))
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT D
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D
+  4  HAVING MIN(COUNT (DISTINCT P));
+HAVING MIN(COUNT (DISTINCT P))
+           *
+ERROR at line 4:
+ORA-00935: group function is nested too deeply 
+
+
+SQL> SELECT D
+  2  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  3  GROUP BY D
+  4  HAVING COUNT (DISTINCT P) <= (SELECT MIN(COUNT (DISTINCT P))
+  5  FROM DEPARTAMENTO NATURAL JOIN AREA NATURAL JOIN PROFESOR
+  6  GROUP BY D);
+
+D                                                                               
+------------------------------------------------------------                    
+ASTROFISICA                                                                     
+MATEMATICA FUNDAMENTAL                                                          
+
+SQL> SELECT P
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE FF IS NULL
+  4  GROUP BY P
+  5  ;
+
+P                                                                               
+------------------------------------------------------------                    
+MARIO                                                                           
+JUAN                                                                            
+PEDRO                                                                           
+FRANCISCO                                                                       
+SOLEDAD                                                                         
+CARLOS                                                                          
+IVAN                                                                            
+DAVID                                                                           
+MARIA                                                                           
+JOSE MANUEL                                                                     
+ANGELA                                                                          
+
+11 rows selected.
+
+SQL> SELECT P, CAS
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE FF IS NULL
+  4  GROUP BY P;
+SELECT P, CAS
+          *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT P, SUM(CTA,CPA,CLA)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE FF IS NULL
+  4  GROUP BY P;
+SELECT P, SUM(CTA,CPA,CLA)
+          *
+ERROR at line 1:
+ORA-00909: invalid number of arguments 
+
+
+SQL> SELECT P, SUM(CTA+CPA+CLA)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE FF IS NULL
+  4  GROUP BY P;
+
+P                                                            SUM(CTA+CPA+CLA)   
+------------------------------------------------------------ ----------------   
+MARIO                                                                     7.5   
+JUAN                                                                        3   
+PEDRO                                                                       9   
+FRANCISCO                                                                   6   
+SOLEDAD                                                                     3   
+CARLOS                                                                      3   
+IVAN                                                                        6   
+DAVID                                                                       3   
+MARIA                                                                       9   
+JOSE MANUEL                                                                 3   
+ANGELA                                                                      6   
+
+11 rows selected.
+
+SQL> SELECT P, SUM(CTA+CPA+CLA)
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE FF IS NULL
+  4  GROUP BY P
+  5  HAVING SUM(CTA+CPA+CLA) >= (SELECT MAX(SUM(CTA+CPA+CLA))
+  6  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  7  WHERE FF IS NULL
+  8  GROUP BY P);
+
+P                                                            SUM(CTA+CPA+CLA)   
+------------------------------------------------------------ ----------------   
+PEDRO                                                                       9   
+MARIA                                                                       9   
+
+SQL> SPOOL OFF
