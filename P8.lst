@@ -1,0 +1,225 @@
+SQL> INSERT INTO TITULACION (T)
+  2  SELECT (T)
+  3  FROM ASIGNATURA;
+INSERT INTO TITULACION (T)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (ALU0101043845.SYS_C0080696) violated 
+
+
+SQL> INSERT INTO TITULACION (T)
+  2  SELECT (DISTINCT T)
+  3  FROM ASIGNATURA;
+SELECT (DISTINCT T)
+        *
+ERROR at line 2:
+ORA-00936: missing expression 
+
+
+SQL> INSERT INTO TITULACION (T)
+  2  SELECT DISTINCT T
+  3  FROM ASIGNATURA;
+
+4 rows created.
+
+SQL> SELECT *
+  2  FROM TITULACION;
+
+T                                                            FAC                                                                                                                                                                                                                                            
+------------------------------------------------------------ ------------------------------------------------------------                                                                                                                                                                                   
+GF                                                                                                                                                                                                                                                                                                          
+GM                                                                                                                                                                                                                                                                                                          
+GII                                                                                                                                                                                                                                                                                                         
+MII                                                                                                                                                                                                                                                                                                         
+
+SQL> INSERT INTO TITULACION
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> ROLL BACK
+Rollback complete.
+SQL> SELECT *
+  2  FROM TITULACION;
+
+no rows selected
+
+SQL> CREATE TABLE TITULACION
+  2  (T VARCHAR(5) PRIMARY KEY,
+  3  FAC VARCHAR(5));
+CREATE TABLE TITULACION
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> DROP TABLE TITULACION
+  2  ;
+
+Table dropped.
+
+SQL> CREATE TABLE TITULACION
+  2  (T VARCHAR(5) PRIMARY KEY,
+  3  FAC VARCHAR(5));
+
+Table created.
+
+SQL> INSERT INTO TITULACION
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO TITULACION (T)
+  2  SELECT DISTINCT T
+  3  FROM ASIGNATURA;
+
+4 rows created.
+
+SQL> SELECT *
+  2  FROM TITULACION;
+
+T     FAC                                                                                                                                                                                                                                                                                                   
+----- -----                                                                                                                                                                                                                                                                                                 
+GF                                                                                                                                                                                                                                                                                                          
+GM                                                                                                                                                                                                                                                                                                          
+GII                                                                                                                                                                                                                                                                                                         
+MII                                                                                                                                                                                                                                                                                                         
+
+SQL> UPDATE TITULACION
+  2  SET FAC = 'ESIT'
+  3  WHERE T IN ('GII', 'MII');
+
+0 rows updated.
+
+SQL> SELECT *
+  2  FROM TITULACION;
+
+T     FAC                                                                                                                                                                                                                                                                                                   
+----- -----                                                                                                                                                                                                                                                                                                 
+GF                                                                                                                                                                                                                                                                                                          
+GM                                                                                                                                                                                                                                                                                                          
+GII                                                                                                                                                                                                                                                                                                         
+MII                                                                                                                                                                                                                                                                                                         
+
+SQL> UPDATE TITULACION
+  2  SET FAC='ESIT'
+  3  WHERE T IN ('GII', 'MII');
+
+0 rows updated.
+
+SQL> UPDATE TITULACION
+  2  SET FAC = "ESIT"
+  3  WHERE T IN ('GII', 'MII');
+SET FAC = "ESIT"
+          *
+ERROR at line 2:
+ORA-00904: "ESIT": invalid identifier 
+
+
+SQL> UPDATE TITULACION
+  2  SET FAC = 'ESIT'
+  3  WHERE T = 'MII';
+
+0 rows updated.
+
+SQL> SELECT *
+  2  FROM TITULACION;
+
+T     FAC                                                                                                                                                                                                                                                                                                   
+----- -----                                                                                                                                                                                                                                                                                                 
+GF                                                                                                                                                                                                                                                                                                          
+GM                                                                                                                                                                                                                                                                                                          
+GII                                                                                                                                                                                                                                                                                                         
+MII                                                                                                                                                                                                                                                                                                         
+
+SQL> UPDATE TITULACION
+  2  SET FAC = 'FC'
+  3  WHERE T = 'GM';
+
+0 rows updated.
+
+SQL> DROP TABLE TITULACION;
+
+Table dropped.
+
+SQL> CREATE TABLE TITULACION
+  2  (T CHAR(4) PRIMARY KEY,
+  3  FAC VARCHAR2(10));
+
+Table created.
+
+SQL> INSERT INTO TITULACION (T)
+  2  SELECT DISTINCT T
+  3  FROM ASIGNATURA;
+
+4 rows created.
+
+SQL> SELECT *
+  2  FROM TITULACION
+  3  ;
+
+T    FAC                                                                                                                                                                                                                                                                                                    
+---- ----------                                                                                                                                                                                                                                                                                             
+GF                                                                                                                                                                                                                                                                                                          
+GM                                                                                                                                                                                                                                                                                                          
+GII                                                                                                                                                                                                                                                                                                         
+MII                                                                                                                                                                                                                                                                                                         
+
+SQL> UPDATE TITULACION
+  2  SET FAC = 'ESIT'
+  3  WHERE T IN ('GII', 'MII');
+
+2 rows updated.
+
+SQL> UPDATE TITULACION
+  2  SET FAC = 'FC'
+  3  WHERE T IN ('GF', 'GM');
+
+2 rows updated.
+
+SQL> SELECT *
+  2  FROM TITULACION;
+
+T    FAC                                                                                                                                                                                                                                                                                                    
+---- ----------                                                                                                                                                                                                                                                                                             
+GF   FC                                                                                                                                                                                                                                                                                                     
+GM   FC                                                                                                                                                                                                                                                                                                     
+GII  ESIT                                                                                                                                                                                                                                                                                                   
+MII  ESIT                                                                                                                                                                                                                                                                                                   
+
+SQL> CREATE SYNONYM TIT
+  2  FROM TITULACION;
+FROM TITULACION
+*
+ERROR at line 2:
+ORA-00905: missing keyword 
+
+
+SQL> CREATE SYNONYM TIT
+  2  FOR TITULACION;
+
+Synonym created.
+
+SQL> SELECT *
+  2  FROM TIT;
+
+T    FAC                                                                                                                                                                                                                                                                                                    
+---- ----------                                                                                                                                                                                                                                                                                             
+GF   FC                                                                                                                                                                                                                                                                                                     
+GM   FC                                                                                                                                                                                                                                                                                                     
+GII  ESIT                                                                                                                                                                                                                                                                                                   
+MII  ESIT                                                                                                                                                                                                                                                                                                   
+
+SQL> ALTER TABLE ASIGNATURA
+  2  ADD CONSTRAINT FK_ASIGNATURA_TITULACION
+  3  FOREIGN KEY (T) REFERENCES TITULACION ON DELETE CASCADE;
+
+Table altered.
+
+SQL> SPOOL OFF
