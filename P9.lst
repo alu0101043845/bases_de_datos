@@ -1,0 +1,254 @@
+SQL> SET SERVEROUTPUT ON
+SQL> BEGIN
+  2  DBMS_OUTPUT.PUT_LINE('HOLA MUNDO')
+  3  END;
+  4  /
+END;
+*
+ERROR at line 3:
+ORA-06550: line 3, column 1: 
+PLS-00103: Encountered the symbol "END" when expecting one of the following: 
+:= . ( % ; 
+The symbol ";" was substituted for "END" to continue. 
+
+
+SQL> SET SERVEROUTPUT ON
+SQL> BEGIN
+  2  DBMS_OUTPUT.PUT_LINE('HOLA MUNDO');
+  3  END;
+  4  /
+HOLA MUNDO                                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> BEGIN
+  2  DBMS_OUTPUT.PUT_LINE('HOLA MUNDO');
+  3  END;
+  4  /
+HOLA MUNDO                                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> run;
+  1  BEGIN
+  2  DBMS_OUTPUT.PUT_LINE('HOLA MUNDO');
+  3* END;
+HOLA MUNDO                                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> RUN;
+  1  BEGIN
+  2  DBMS_OUTPUT.PUT_LINE('HOLA MUNDO');
+  3* END;
+HOLA MUNDO                                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> SAVE HOLAMUNDO;
+Created file HOLAMUNDO.sql
+SQL> GET HOLAMUNDO;
+  1  BEGIN
+  2  DBMS_OUTPUT.PUT_LINE('HOLA MUNDO');
+  3* END;
+SQL> RUN;
+  1  BEGIN
+  2  DBMS_OUTPUT.PUT_LINE('HOLA MUNDO');
+  3* END;
+HOLA MUNDO                                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> CREATE OR REPLACE PROCEDURE HOLAMUNDO
+  2  IS
+  3  BEGIN
+  4  DBMS_OUTPUT.PUT_LINE('HOLA MUNDO');
+  5  END;
+  6  /
+
+Procedure created.
+
+SQL> CALL HOLAMUNDO();
+HOLA MUNDO                                                                      
+
+Call completed.
+
+SQL> CREATE OR REPLACE FUNCTION DOBLE(X NUMBER) RETURN NUMBER
+  2  IS
+  3  BEGIN
+  4  RETURN 2*X;
+  5  END;
+  6  /
+
+Function created.
+
+SQL> CALL DOBLE(8);
+CALL DOBLE(8)
+     *
+ERROR at line 1:
+ORA-06576: not a valid function or procedure name 
+
+
+SQL> SHOW ERROR;
+No errors.
+SQL> SHOW ERRORS;
+No errors.
+SQL> CREATE OR REPLACE FUNCTION DOBLE(X NUMBER) RETURN NUMBER
+  2  IS
+  3  BEGIN
+  4  RETURN 2*X;
+  5  END;
+  6  /
+
+Function created.
+
+SQL> SHOW ERRORS;
+No errors.
+SQL> SELECT CAS, DOBLE(CT)
+  2  FROM ASIGNATURA;
+
+       CAS  DOBLE(CT)                                                           
+---------- ----------                                                           
+         1          6                                                           
+         2          3                                                           
+         3          3                                                           
+         4          3                                                           
+         5          6                                                           
+         6          6                                                           
+         7          6                                                           
+         8          6                                                           
+         9          6                                                           
+        10          6                                                           
+        11         12                                                           
+
+       CAS  DOBLE(CT)                                                           
+---------- ----------                                                           
+        12          9                                                           
+
+12 rows selected.
+
+SQL> SET LINESIZE 130
+SQL> SET PAGE SIZE 300
+SP2-0158: unknown SET option "PAGE"
+SQL> SET PAGESIZE 300
+SQL> SELECT CAS, CT, DOBLE(CT)
+  2  FROM ASIGNATURA;
+
+       CAS         CT  DOBLE(CT)                                                                                                  
+---------- ---------- ----------                                                                                                  
+         1          3          6                                                                                                  
+         2        1.5          3                                                                                                  
+         3        1.5          3                                                                                                  
+         4        1.5          3                                                                                                  
+         5          3          6                                                                                                  
+         6          3          6                                                                                                  
+         7          3          6                                                                                                  
+         8          3          6                                                                                                  
+         9          3          6                                                                                                  
+        10          3          6                                                                                                  
+        11          6         12                                                                                                  
+        12        4.5          9                                                                                                  
+
+12 rows selected.
+
+SQL> SELECT DOBLE(4.5)
+  2  FROM DUAL;
+
+DOBLE(4.5)                                                                                                                        
+----------                                                                                                                        
+         9                                                                                                                        
+
+SQL> CALL DOBLE(4.5);
+CALL DOBLE(4.5)
+     *
+ERROR at line 1:
+ORA-06576: not a valid function or procedure name 
+
+
+SQL> VARIABLE X NUMBER
+SQL> CALL DOBLE(4.5):X
+  2  ;
+CALL DOBLE(4.5):X
+               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> CALL DOBLE(4.5) INTO :X;
+
+Call completed.
+
+SQL> PRINT X;
+
+         X                                                                                                                        
+----------                                                                                                                        
+         9                                                                                                                        
+
+SQL> DECLARE
+  2  RESULT NUMBER;
+  3  BEGIN
+  4  RESULT:=DOBLE(4.5);
+  5  DBMS_OUTPUT.PUT_LINE(TO_CHAR(RESULT));
+  6  END;
+  7  /
+9                                                                                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> CREATE OR REPLACE PROCEDURE TRIPLE(X IN NUMBER, Y OUT NUMBER)
+  2  IS
+  3  BEGIN
+  4  Y:=3*X;
+  5  END;
+  6  /
+
+Procedure created.
+
+SQL> DECLARE
+  2  RESULT NUMBER;
+  3  BEGIN
+  4  TRIPLE(4.5,RESULT);
+  5  DBMS_OUTPUT.PUT_LINE(TO_CHAR(RESULT));
+  6  END;
+  7  /
+13.5                                                                                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> SELECT P,CAT
+  2  FROM PROFESOR
+  3  WHERE DNI = &V_dni;
+Enter value for v_dni: 1111
+old   3: WHERE DNI = &V_dni
+new   3: WHERE DNI = 1111
+
+P                                                            CAT                                                                  
+------------------------------------------------------------ -----                                                                
+JUAN                                                         CU                                                                   
+
+SQL> SELECT P, CAT
+  2  INTO v_p, v_cat
+  3  FROM PROFESOR
+  4  WHERE DNI = &v_dni;
+Enter value for v_dni: 1111
+old   4: WHERE DNI = &v_dni
+new   4: WHERE DNI = 1111
+INTO v_p, v_cat
+     *
+ERROR at line 2:
+ORA-00905: missing keyword 
+
+
+SQL> CREATE OR REPLACE PROCEDURE DATOSP(V_dni PROFESOR.DNI%TYPE, V_p OUT PROFESOR.P%TYPE, V_cat OUT PROFESOR.CAT%TYPE)
+  2  IS
+  3  BEGIN
+  4  SELECT P, CAT
+  5  INTO V_p, v_cat
+  6  FROM PROFESOR
+  7  WHERE DNI = V_dni;
+  8  END;
+  9  /
+
+Procedure created.
+
+SQL> SPOOL OFF
