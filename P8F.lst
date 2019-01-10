@@ -1,0 +1,37 @@
+SQL> REVOKE SELECT,UPDATE,INSERT,DELETE
+  2  ON DEPARTAMENTO
+  3  FROM alumno;
+
+Revoke succeeded.
+
+SQL> REVOKE SELECT,UPDATE,INSERT,DELETE
+  2  ON AREA
+  3  FROM alumno;
+
+Revoke succeeded.
+
+SQL> REVOKE SELECT,UPDATE,INSERT,DELETE
+  2  ;
+REVOKE SELECT,UPDATE,INSERT,DELETE
+                            *
+ERROR at line 1:
+ORA-00990: missing or invalid privilege 
+
+
+SQL> REVOKE SELECT,UPDATE
+  2  ON ASIGNATURA
+  3  FROM alumno;
+
+Revoke succeeded.
+
+SQL> REVOKE SELECT,UPDATE
+  2  ON TITULACION
+  3  FROM alumno;
+
+Revoke succeeded.
+
+SQL> COMMIT WORK;
+
+Commit complete.
+
+SQL> EXIT
