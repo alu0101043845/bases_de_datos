@@ -1,0 +1,343 @@
+SQL> SET SERVEROUTPUT ON
+SQL> DECLARE
+  2  i NUMBER :=1;
+  3  i3 NUMBER;
+  4  BEGIN
+  5  WHILE i <=10 LOOP
+  6  i3:=i**3;
+  7  DBMS_OUTPUT.PUT_LINE('i= '||i||'cubo= '||i3);
+  8  i:=i+1;
+  9  END;
+ 10  END LOOP;
+ 11  END;
+ 12  /
+END;
+   *
+ERROR at line 9:
+ORA-06550: line 9, column 4: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+loop 
+
+
+SQL> DECLARE
+  2  i NUMBER :=1;
+  3  i3 NUMBER;
+  4  BEGIN
+  5  WHILE i <=10 LOOP
+  6  i3:=i**3;
+  7  DBMS_OUTPUT.PUT_LINE('i= '||i||'cubo= '||i3);
+  8  i:=i+1;
+  9  END LOOP;
+ 10  END;
+ 11  /
+i= 1cubo= 1                                                                     
+i= 2cubo= 8                                                                     
+i= 3cubo= 27                                                                    
+i= 4cubo= 64                                                                    
+i= 5cubo= 125                                                                   
+i= 6cubo= 216                                                                   
+i= 7cubo= 343                                                                   
+i= 8cubo= 512                                                                   
+i= 9cubo= 729                                                                   
+i= 10cubo= 1000                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> BEGIN
+  2  FOR i IN 1..10 LOOP
+  3  DBMS_OUTPUT.PUT_LINE('i= '||i||'cubo= '||i**3);
+  4  END LOOP;
+  5  END;
+  6  /
+i= 1cubo= 1                                                                     
+i= 2cubo= 8                                                                     
+i= 3cubo= 27                                                                    
+i= 4cubo= 64                                                                    
+i= 5cubo= 125                                                                   
+i= 6cubo= 216                                                                   
+i= 7cubo= 343                                                                   
+i= 8cubo= 512                                                                   
+i= 9cubo= 729                                                                   
+i= 10cubo= 1000                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> BEGIN
+  2  FOR i IN REVERSE 1..10 LOOP
+  3  DBMS_OUTPUT.PUT_LINE('i= '||i||'cubo= '||i**3);
+  4  END LOOP;
+  5  END;
+  6  /
+i= 10cubo= 1000                                                                 
+i= 9cubo= 729                                                                   
+i= 8cubo= 512                                                                   
+i= 7cubo= 343                                                                   
+i= 6cubo= 216                                                                   
+i= 5cubo= 125                                                                   
+i= 4cubo= 64                                                                    
+i= 3cubo= 27                                                                    
+i= 2cubo= 8                                                                     
+i= 1cubo= 1                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  i NUMBER :=10;
+  3  BEGIN
+  4  WHILE i >=1 LOOP
+  5  DBMS_OUTPUT.PUT_LINE('i= '||i||'cubo= '||i**3);
+  6  i:=i-1;
+  7  END LOOP;
+  8  END;
+  9  /
+i= 10cubo= 1000                                                                 
+i= 9cubo= 729                                                                   
+i= 8cubo= 512                                                                   
+i= 7cubo= 343                                                                   
+i= 6cubo= 216                                                                   
+i= 5cubo= 125                                                                   
+i= 4cubo= 64                                                                    
+i= 3cubo= 27                                                                    
+i= 2cubo= 8                                                                     
+i= 1cubo= 1                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> BEGIN
+  2  FOR i IN REVERSE 1..10 LOOP
+  3  IF MOD(i,2)=0 THEN
+  4  DBMS_OUTPUT.PUT_LINE('i= '||i||'cubo= '||i**3);
+  5  END IF;
+  6  END LOOP;
+  7  END;
+  8  /
+i= 10cubo= 1000                                                                 
+i= 8cubo= 512                                                                   
+i= 6cubo= 216                                                                   
+i= 4cubo= 64                                                                    
+i= 2cubo= 8                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  i NUMBER :=10;
+  3  BEGIN
+  4  WHILE i >=1 LOOP
+  5  DBMS_OUTPUT.PUT_LINE('i= '||i||'cubo= '||i**3);
+  6  i:=i-2;
+  7  END LOOP;
+  8  END;
+  9  /
+i= 10cubo= 1000                                                                 
+i= 8cubo= 512                                                                   
+i= 6cubo= 216                                                                   
+i= 4cubo= 64                                                                    
+i= 2cubo= 8                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  CURSOR C_PROF IS
+  3  SELECT *
+  4  FROM PROFESOR;
+  5  v_prof  PROFESOR%ROWTYPE;
+  6  BEGIN
+  7  OPEN C_PROF;
+  8  LOOP
+  9  FETCH C_PROF INTO v_prof;
+ 10  EXIT WHEN C_PROF%NOTFOUND;
+ 11  DBMS_OUTPUT.PUT_WHEN||v_prof.WHEN WHEN||v_prof.P);NOMBRE=DNI||DNI=LINE(
+ 12  END LOOP;
+ 13  END;
+ 14  /
+DBMS_OUTPUT.PUT_WHEN||v_prof.WHEN WHEN||v_prof.P);NOMBRE=DNI||DNI=LINE(
+                    *
+ERROR at line 11:
+ORA-06550: line 11, column 21: 
+PLS-00103: Encountered the symbol "|" when expecting one of the following: 
+:= . ( @ % ; 
+
+
+SQL> DECLARE
+  2  CURSOR C_PROF IS
+  3  SELECT *
+  4  FROM PROFESOR;
+  5  v_prof  PROFESOR%ROWTYPE;
+  6  BEGIN
+  7  OPEN C_PROF;
+  8  LOOP
+  9  FETCH C_PROF INTO v_prof;
+ 10  EXIT WHEN C_PROF%NOTFOUND;
+ 11  DBMS_OUTPUT.PUT_WHEN||v_prof.WHEN WHEN||v_prof.P);NOMBRE=DNI||DNI=LINE(
+ 12  END LOOP
+ 13  CLOSE C_PROF;
+ 14  END;
+ 15  /
+DBMS_OUTPUT.PUT_WHEN||v_prof.WHEN WHEN||v_prof.P);NOMBRE=DNI||DNI=LINE(
+                    *
+ERROR at line 11:
+ORA-06550: line 11, column 21: 
+PLS-00103: Encountered the symbol "|" when expecting one of the following: 
+:= . ( @ % ; 
+
+
+SQL> DECLARE
+  2  CURSOR C_PROF IS
+  3  SELECT *
+  4  FROM PROFESOR;
+  5  v_prof  PROFESOR%ROWTYPE;
+  6  BEGIN
+  7  OPEN C_PROF;
+  8  LOOP
+  9  FETCH C_PROF INTO v_prof;
+ 10  EXIT WHEN C_PROF%NOTFOUND;
+ 11  DBMS_OUTPUT.PUT_LINE('DNI='||v_prof.DNI||' NOMBRE='||v_prof.P);
+ 12  END LOOP;
+ 13  CLOSE C_PROF;
+ 14  END;
+ 15  /
+DNI=9090 NOMBRE=LUIS                                                            
+DNI=1111 NOMBRE=JUAN                                                            
+DNI=2222 NOMBRE=CARLOS                                                          
+DNI=3333 NOMBRE=PEDRO                                                           
+DNI=4444 NOMBRE=MARIA                                                           
+DNI=5555 NOMBRE=IVAN                                                            
+DNI=6666 NOMBRE=CARMEN                                                          
+DNI=7777 NOMBRE=MARIO                                                           
+DNI=8888 NOMBRE=FRANCISCO                                                       
+DNI=9999 NOMBRE=ANGELA                                                          
+DNI=1010 NOMBRE=DAVID                                                           
+DNI=2020 NOMBRE=SOLEDAD                                                         
+DNI=3030 NOMBRE=JOSE MANUEL                                                     
+DNI=4040 NOMBRE=CARMELO                                                         
+DNI=5050 NOMBRE=CARINA                                                          
+
+PL/SQL procedure successfully completed.
+
+SQL> DECLARE
+  2  CURSOR C_PROF IS
+  3  SELECT *
+  4  FROM PROFESOR;
+  5  BEGIN
+  6  FOR v_prof IN C_PROF LOOP
+  7  DBMS_OUTPUT.PUT_LINE('DNI='||v_prof.DNI||' NOMBRE='||v_prof.P);
+  8  END LOOP;
+  9  END;
+ 10  /
+DNI=9090 NOMBRE=LUIS                                                            
+DNI=1111 NOMBRE=JUAN                                                            
+DNI=2222 NOMBRE=CARLOS                                                          
+DNI=3333 NOMBRE=PEDRO                                                           
+DNI=4444 NOMBRE=MARIA                                                           
+DNI=5555 NOMBRE=IVAN                                                            
+DNI=6666 NOMBRE=CARMEN                                                          
+DNI=7777 NOMBRE=MARIO                                                           
+DNI=8888 NOMBRE=FRANCISCO                                                       
+DNI=9999 NOMBRE=ANGELA                                                          
+DNI=1010 NOMBRE=DAVID                                                           
+DNI=2020 NOMBRE=SOLEDAD                                                         
+DNI=3030 NOMBRE=JOSE MANUEL                                                     
+DNI=4040 NOMBRE=CARMELO                                                         
+DNI=5050 NOMBRE=CARINA                                                          
+
+PL/SQL procedure successfully completed.
+
+SQL> CREATE PROCEDURE AREAS_DEP(v_cd AREA.CD%TYPE) IS
+  2  CURSOR C_AREAS IS
+  3  SELECT AR
+  4  FROM AREAS
+  5  WHERE CD=v_cd;
+  6  BEGIN
+  7  FOR v_ar IN C_AREAS LOOP
+  8  DBMS_OUTPUT.PUT_LINE(v_ar.AR);
+  9  END LOOP;
+ 10  END;
+ 11  /
+
+Warning: Procedure created with compilation errors.
+
+SQL> BEGIN
+  2  AREAS_DEP(1);
+  3  END;
+  4  /
+AREAS_DEP(1);
+*
+ERROR at line 2:
+ORA-06550: line 2, column 1: 
+PLS-00905: object ALU0101043845.AREAS_DEP is invalid 
+ORA-06550: line 2, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> SHOW ERRORS
+Errors for PROCEDURE AREAS_DEP:
+
+LINE/COL ERROR                                                                  
+-------- -----------------------------------------------------------------      
+3/1      PL/SQL: SQL Statement ignored                                          
+4/6      PL/SQL: ORA-00942: table or view does not exist                        
+8/1      PL/SQL: Statement ignored                                              
+8/22     PLS-00364: loop index variable 'V_AR' use is invalid                   
+SQL> DROP PROCEDURE AREAS_DEP
+  2  ;
+
+Procedure dropped.
+
+SQL> CREATE PROCEDURE AREAS_DEP(v_cd AREA.CD%TYPE) IS
+  2  CURSOR C_AREAS IS
+  3  SELECT AR
+  4  FROM AREA
+  5  WHERE CD=v_cd;
+  6  BEGIN
+  7  FOR v_ar IN C_AREAS LOOP
+  8  DBMS_OUTPUT.PUT_LINE(v_ar.AR);
+  9  END LOOP;
+ 10  END;
+ 11  /
+
+Procedure created.
+
+SQL> BEGIN
+  2  AREAS_DEP(1);
+  3  END;
+  4  /
+ANALISIS MATEMATICO                                                             
+DIDACTICA DE LA MATEMATICA                                                      
+MATEMATICA APLICADA                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> ;
+  1  BEGIN
+  2  AREAS_DEP(1);
+  3* END;
+SQL> DROP PROCEDURE AREAS_DEP;
+
+Procedure dropped.
+
+SQL> CREATE PROCEDURE AREAS_DEP(v_cd AREA.CD%TYPE) IS
+  2  CURSOR C_AREAS (v AREA.CD%TYPE)IS
+  3  SELECT AR
+  4  FROM AREA
+  5  WHERE CD=v;
+  6  BEGIN
+  7  FOR v_ar IN C_AREAS (v_cd) LOOP
+  8  DBMS_OUTPUT.PUT_LINE(v_ar.AR);
+  9  END LOOP;
+ 10  END;
+ 11  /
+
+Procedure created.
+
+SQL> BEGIN
+  2  AREAS_DEP(1);
+  3  END;
+  4  /
+ANALISIS MATEMATICO                                                             
+DIDACTICA DE LA MATEMATICA                                                      
+MATEMATICA APLICADA                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> EXIT
