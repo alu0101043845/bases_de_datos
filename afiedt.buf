@@ -1,0 +1,4 @@
+--Editando el buffer
+SELECT SYSDATE
+FROM DUAL
+/

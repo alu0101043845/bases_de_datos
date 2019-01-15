@@ -1,0 +1,176 @@
+SQL> GRANT SELECT
+  2  ON DEPARTAMENTO
+  3  TO alumno;
+
+Grant succeeded.
+
+SQL> GRANT SELECT
+  2  ON AREA
+  3  TO alumno;
+
+Grant succeeded.
+
+SQL> GRANT SELECT
+  2  ON ASIGNATURA
+  3  TO alumno;
+
+Grant succeeded.
+
+SQL> GRANT SELECT
+  2  ON TITULACION
+  3  TO alumno;
+
+Grant succeeded.
+
+SQL> GRANT INSERT,UPDATE,DELETE ON DEPARTAMENTO TO alumno;
+
+Grant succeeded.
+
+SQL> GRANT INSERT,UPDATE,DELETE
+  2  ON AREA
+  3  TO alumno;
+
+Grant succeeded.
+
+SQL> GRANT UPDATE
+  2  ON TITULACION
+  3  TO alumno;
+
+Grant succeeded.
+
+SQL> GRANT UPDATE
+  2  ON ASIGNATURA
+  3  TO alumno;
+
+Grant succeeded.
+
+SQL> COMMIT WORK;
+
+Commit complete.
+
+SQL> EXIT
+SQL> SELECT *
+  2  FROM alu0101043845.DEPARTAMENTO;
+
+        CD D                                                                    
+---------- ------------------------------------------------------------         
+         1 ANALISIS MATEMATICO                                                  
+         2 ASTROFISICA                                                          
+         3 ESTADISTICA, INVESTIGACION OPERATIVA Y COMPUTACION                   
+         4 MATEMATICA FUNDAMENTAL                                               
+
+SQL> SELECT *
+  2  FROM alu0101043845.PROFESOR;
+FROM alu0101043845.PROFESOR
+                   *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> VALUES(5,'ECONOMIA');
+SP2-0734: unknown command beginning "VALUES(5,'..." - rest of line ignored.
+SQL> INSERT INTO alu0101043845.DEPARTAMENTO
+  2  VALUES(5,'ECONOMIA');
+
+1 row created.
+
+SQL> UPDATE alu0101043845.DEPARTAMENTO
+  2  SET D='ECONOMIA APLICADA'
+  3  WHERE CD=5;
+
+1 row updated.
+
+SQL> UPDATE alu0101043845.TITULACION
+  2  SET DAC='ETSII'
+  3  WHERE T='GII';
+SET DAC='ETSII'
+    *
+ERROR at line 2:
+ORA-00904: "DAC": invalid identifier 
+
+
+SQL> UPDATE alu0101043845.TITULACION
+  2  SET FAC='ETSII'
+  3  WHERE T='GII';
+
+1 row updated.
+
+SQL> DELETE FROM alu0101043845.TITULACION
+  2  WHERE T='GII';
+DELETE FROM alu0101043845.TITULACION
+                          *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> ROLLBACK WORK;
+
+Rollback complete.
+
+SQL> CREATE VIEW VISTA3
+  2  AS SELECT A,CAR
+  3  FROM alu0101043845.ASIGNATURA;
+
+View created.
+
+SQL> DESCRIBE VISTA3
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ A                                         NOT NULL VARCHAR2(50)
+ CAR                                                NUMBER(3)
+
+SQL> SELECT *
+  2  FROM VISTA3;
+
+A                                                         CAR                   
+-------------------------------------------------- ----------                   
+BASES DE DATOS                                              7                   
+INTELIGENCIA ARTIFICIAL                                     4                   
+ALMACENES DE DATOS                                          7                   
+MINERIA DE DATOS                                            7                   
+INFORMATICA BASICA                                          7                   
+ALGEBRA                                                     1                   
+CALCULO                                                     8                   
+OPTIMIZACION                                                6                   
+GESTION DE RIESGOS                                          4                   
+ASTRONIMIA                                                  3                   
+ENSEANZA DE LA MATEMATICA                                   5                   
+
+A                                                         CAR                   
+-------------------------------------------------- ----------                   
+ANALISIS COMPLEJO                                           2                   
+ESTADISTICA                                                 6                   
+
+13 rows selected.
+
+SQL> DROP VIEW VISTA3
+  2  ;
+
+View dropped.
+
+SQL> CREATE VIEW VISTA3(A,CAR)
+  2  AS SELECT A,CAR
+  3  FROM alu0101043845.ASIGNATURA;
+
+View created.
+
+SQL> DESCRIBE VISTA3
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ A                                         NOT NULL VARCHAR2(50)
+ CAR                                                NUMBER(3)
+
+SQL> DROP VIEW VISTA3
+  2  ;
+
+View dropped.
+
+SQL> DROP TABLE alu0101043845.ASIGNATURA;
+DROP TABLE alu0101043845.ASIGNATURA
+                         *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> EXIT
